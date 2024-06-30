@@ -4,8 +4,9 @@ import {AppContext} from "../../providers/appProvider";
 import { Actions } from "../../constants/actions";
 import HandlePlay from "../handle-play/HandlePlay";
 import {AddIcon} from "../icons/AddIcon";
+import {DeleteIcon} from "../icons/DeleteIcon";
 
-function TrackRow({ track }) {
+function TrackRow({ track, playlistName = '' }) {
     const { state, dispatch } = useContext(AppContext);
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -26,6 +27,13 @@ function TrackRow({ track }) {
         // Hide the dropdown after adding the track
         setDropdownVisible(false);
     };
+
+    const handleDeleteFromPlaylist = (playlistName) => {
+        dispatch({
+            type: Actions.DELETE_TRACK_FROM_PLAYLIST,
+            payload: { playlistName, track }
+        });
+    }
 
     const isPlaying = state.currentTrack && state.currentTrack.id;
 
@@ -61,6 +69,16 @@ function TrackRow({ track }) {
                     onClick={toggleDropdown}
                 >
                     {AddIcon}
+                </button> : <></>}
+            {playlistName.length > 0 ?
+                <button
+                    className={styles.addToPlaylist}
+                    title={'Remove from playlist'}
+                    onClick={() => {
+                        handleDeleteFromPlaylist(playlistName)
+                    }}
+                >
+                    {DeleteIcon}
                 </button> : <></>}
         </div>
     </div>

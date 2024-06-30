@@ -5,6 +5,7 @@ import styles from "./Playlists.module.css";
 import {Actions} from "../../constants/actions";
 import {AppContext} from "../../providers/appProvider";
 import SidebarItem from "../sidebar-item/SidebarItem";
+import {ALL_TRACKS_TITLE} from "../../constants/constants";
 
 function Playlists() {
     const [newPlaylistName, setNewPlaylistName] = useState('');
@@ -32,7 +33,7 @@ function Playlists() {
     return (
         <div>
             <h2>Library</h2>
-            <SidebarItem item={state.allTracks} name={'All tracks'} />
+            <SidebarItem item={state.allTracks} name={ALL_TRACKS_TITLE} />
 
             <h2>Playlists</h2>
             <div className={styles.playlistForm}>
@@ -42,14 +43,14 @@ function Playlists() {
                     onChange={(e) => setNewPlaylistName(e.target.value)}
                     placeholder="New playlist name"
                 />
-                <button
+                {newPlaylistName && newPlaylistName.length > 0 ? <button
                     className={styles.addButton}
                     disabled={addNewPlaylistDisabled}
                     title={addNewPlaylistDisabled ? 'Disabled' : 'Add new playlist'}
                     onClick={addPlaylist}
                 >
                     {AddIcon}
-                </button>
+                </button> : <></>}
             </div>
             <div>
                 {state.playlists.map((playlist, index) => (

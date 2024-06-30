@@ -1,4 +1,5 @@
 import { Actions } from "../constants/actions";
+import {PLAYLIST_TILE} from "../constants/constants";
 
 function appReducer(state, action) {
     const { type, payload } = action;
@@ -49,35 +50,47 @@ function appReducer(state, action) {
         case Actions.ADD_PLAYLIST:
             return {
                 ...state,
-                playlists: [...state.playlists, { name: action.payload, tracks: [] }],
+                playlists: [...state.playlists, { name: payload, tracks: [] }],
             };
         case Actions.DELETE_PLAYLIST:
             return {
                 ...state,
-                playlists: state.playlists.filter((playlist) => playlist.name !== action.payload),
+                playlists: state.playlists.filter((playlist) => playlist.name !== payload),
             };
         case Actions.ADD_TRACK_TO_PLAYLIST:
-            console.log(' > add to playlist ', payload);
             return {
                 ...state,
                 playlists: state.playlists.map((playlist, index) =>
                     index === action.payload.playlistIndex
-                        ? { ...playlist, tracks: [...playlist.tracks, action.payload.track] }
+                        ? { ...playlist, tracks: [...playlist.tracks, payload.track] }
                         : playlist
                 ),
             };
         case Actions.DELETE_TRACK_FROM_PLAYLIST:
-            return {
+            let updatedPlaylistTracks = [];
+            const playlists = state.playlists.map((playlist) => {
+                if (playlist.name === payload.playlistName) {
+                    updatedPlaylistTracks = playlist.tracks.filter((track) => track.title !== payload.track.title);
+                    return {
+                        ...playlist,
+                        tracks: updatedPlaylistTracks
+                    }
+                } else {
+                    return playlist;
+                }
+            }, []);
+
+            const newState = {
                 ...state,
-                playlists: state.playlists.map((playlist, playlistIndex) =>
-                    playlistIndex === action.payload.playlistIndex
-                        ? {
-                            ...playlist,
-                            tracks: playlist.tracks.filter((_, trackIndex) => trackIndex !== action.payload.trackIndex),
-                        }
-                        : playlist
-                ),
-            };
+                playlists,
+            }
+
+            if (`${PLAYLIST_TILE}${payload.playlistName}` === state.tracksTitle) {
+                // if tracks view contains the same playlist, update the tracks array to match new playlist tracks
+                newState.tracks = updatedPlaylistTracks;
+            }
+
+            return newState;
 
         default:
             return state;
