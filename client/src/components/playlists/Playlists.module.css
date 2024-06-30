@@ -1,0 +1,6 @@
+
+.playlists {
+    grid-area: playlists;
+    /*background-color: #45aaf2;*/
+    padding: 24px;
+}

@@ -1,0 +1,6 @@
+
+.tracks {
+    grid-area: tracks;
+    /*background-color: #20bf6b;*/
+    padding: 24px;
+}
