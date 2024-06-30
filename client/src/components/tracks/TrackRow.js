@@ -1,19 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from "./TrackRow.module.css";
+import {AppContext} from "../../providers/appProvider";
+import { Actions } from "../../constants/actions";
+import HandlePlay from "../handle-play/HandlePlay";
 
-function TrackRow({ track, handlePlay }) {
-  return (
+function TrackRow({ track }) {
+    const { state, dispatch } = useContext(AppContext);
+    const handlePlay = (track) => dispatch({
+        type: Actions.SET_CURRENT_TRACK,
+        payload: track
+    });
+
+    return (
     <div className={styles.trackRow}>
       <button className={styles.trackPlay} onClick={() => handlePlay(track)}>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M20 12L8 5V19L20 12Z" fill="white" />
-        </svg>
+        <HandlePlay isPlaying={track.id === state.currentTrack.id} />
       </button>
       <div className={styles.trackInfo}>
         <div className={styles.trackTitle}>{track.title}</div>
