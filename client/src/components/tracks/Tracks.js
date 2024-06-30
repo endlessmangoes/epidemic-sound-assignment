@@ -5,23 +5,15 @@ import { AppContext } from "../../providers/appProvider";
 import { Actions } from "../../constants/actions";
 
 function Tracks() {
-    const { state, dispatch } = useContext(AppContext);
-
-    useEffect(() => {
-        fetch("http://0.0.0.0:8000/tracks/", { mode: "cors" })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log('debug: data >', data);
-                dispatch({type: Actions.SET_TRACKS, payload: data});
-            });
-    }, []);
-
-    console.log('debug > state > tracks ', state);
+    const { state } = useContext(AppContext);
     return (
-        <div className={styles.tracks}>
-            {state.tracks.map((track, ix) => (
-                <TrackRow key={ix} track={track} />
-            ))}
+        <div>
+            <h2>{state.tracksTitle}</h2>
+            <div className={styles.tracks}>
+                {state.tracks.map((track, ix) => (
+                    <TrackRow key={ix} track={track} />
+                ))}
+            </div>
         </div>
     )
 }

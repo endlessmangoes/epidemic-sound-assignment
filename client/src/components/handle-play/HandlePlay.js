@@ -7,7 +7,6 @@ function HandlePlay ({ isPlaying }) {
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <path
@@ -25,7 +24,7 @@ function HandlePlay ({ isPlaying }) {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="none"
+            fill="#000"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path d="M20 12L8 5V19L20 12Z" fill="#000" />

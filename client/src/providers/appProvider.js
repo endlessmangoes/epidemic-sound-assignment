@@ -3,6 +3,9 @@ import appReducer from "../reducers/appReducer";
 
 const initialAppState = {
     tracks: [],
+    tracksTitle: '',
+    allTracks: [],
+    playlists: [],
     currentTrack: undefined
 }
 

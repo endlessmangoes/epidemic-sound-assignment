@@ -1,0 +1,7 @@
+.deleteIcon {
+    fill: #B71C1C;
+}
+
+.deleteIcon:hover {
+    fill: #E53935;
+}
