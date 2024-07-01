@@ -1,17 +1,24 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {useRef, useState, useEffect, useContext} from "react";
+import HandlePlay from "../handle-play/HandlePlay";
+import { AppContext } from "../../providers/appProvider";
+import { Actions } from "../../constants/actions";
 import styles from "./AudioPlayer.module.css";
 
 function AudioPlayer({ track }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef(null);
+  const { dispatch } = useContext(AppContext);
+
 
   const handlePlay = () => {
     setIsPlaying(true);
+    dispatch({type: Actions.PLAYING_TRACK_ID, payload: String(track.id) });
   };
 
   const handlePause = () => {
     setIsPlaying(false);
+    dispatch({type: Actions.PLAYING_TRACK_ID, payload: false });
   };
 
   const handleTimeUpdate = (e) => {
@@ -50,32 +57,7 @@ function AudioPlayer({ track }) {
           className={styles.togglePlaybackButton}
           onClick={handleTogglePlaybackClick}
         >
-          {isPlaying ? (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M10 5H7V19H10V5ZM17 5H14V19H17V5Z"
-                fill="#000"
-              />
-            </svg>
-          ) : (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M20 12L8 5V19L20 12Z" fill="#000" />
-            </svg>
-          )}
+          <HandlePlay isPlaying={isPlaying} />
         </button>
         <div className={styles.trackInfo}>
           <div className={styles.trackTitle}>{track.title}</div>
