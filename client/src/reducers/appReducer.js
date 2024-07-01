@@ -1,5 +1,5 @@
 import { Actions } from "../constants/actions";
-import {PLAYLIST_TILE} from "../constants/constants";
+import { PLAYLIST_TILE } from "../constants/constants";
 
 function appReducer(state, action) {
     const { type, payload } = action;
@@ -45,6 +45,17 @@ function appReducer(state, action) {
             return {
                 ...state,
                 currentTrack: track
+            };
+
+        case Actions.PLAYING_TRACK_ID:
+            let trackId;
+            if (payload && payload.length > 0) {
+                trackId = payload;
+            }
+
+            return {
+                ...state,
+                playingTrackId: trackId
             };
 
         case Actions.ADD_PLAYLIST:

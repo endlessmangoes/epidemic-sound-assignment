@@ -1,14 +1,15 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
-import styles from "./TrackRow.module.css";
-import {AppContext} from "../../providers/appProvider";
+import React, {useContext, useEffect, useState} from "react";
+import { AppContext } from "../../providers/appProvider";
 import { Actions } from "../../constants/actions";
 import HandlePlay from "../handle-play/HandlePlay";
-import {AddIcon} from "../icons/AddIcon";
-import {DeleteIcon} from "../icons/DeleteIcon";
+import { AddIcon } from "../icons/AddIcon";
+import { DeleteIcon } from "../icons/DeleteIcon";
+import styles from "./TrackRow.module.css";
 
 function TrackRow({ track, playlistName = '' }) {
     const { state, dispatch } = useContext(AppContext);
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    // const [isPlaying, setPlaying] = useState(false);
 
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
@@ -35,7 +36,7 @@ function TrackRow({ track, playlistName = '' }) {
         });
     }
 
-    const isPlaying = state.currentTrack && state.currentTrack.id;
+    const isPlaying = state.playingTrackId && state.playingTrackId === track.id;
 
     return (
     <div className={styles.trackRow}>

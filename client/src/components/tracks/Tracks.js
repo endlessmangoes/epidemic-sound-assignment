@@ -1,8 +1,8 @@
+import React, { useContext } from "react";
 import TrackRow from "./TrackRow";
-import React, {useContext, useEffect} from "react";
-import styles from "./Tracks.module.css";
 import { AppContext } from "../../providers/appProvider";
-import {PLAYLIST_TILE} from "../../constants/constants";
+import { PLAYLIST_TILE } from "../../constants/constants";
+import styles from "./Tracks.module.css";
 
 function Tracks() {
     const { state } = useContext(AppContext);

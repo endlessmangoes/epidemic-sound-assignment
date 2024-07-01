@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext } from "react";
 import styles from "./SidebarItem.module.css";
 import { AppContext } from "../../providers/appProvider";
 import { Actions } from "../../constants/actions";
 import { DeleteIcon } from "../icons/DeleteIcon";
-import {ALL_TRACKS_TITLE, PLAYLIST_TILE} from "../../constants/constants";
+import { ALL_TRACKS_TITLE, PLAYLIST_TILE } from "../../constants/constants";
 
 
 function SidebarItem ({ name, hasDelete = false }) {

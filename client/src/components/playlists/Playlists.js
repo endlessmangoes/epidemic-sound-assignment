@@ -26,7 +26,7 @@ function Playlists() {
                 dispatch({type: Actions.SET_TRACKS_TITLE, payload: 'All Tracks'});
                 dispatch({type: Actions.SET_ALL_TRACKS, payload: data});
             });
-    }, []);
+    }, [dispatch]);
 
     const addNewPlaylistDisabled = newPlaylistName.trim().length === 0;
 

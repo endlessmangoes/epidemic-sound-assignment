@@ -6,7 +6,8 @@ const initialAppState = {
     tracksTitle: '',
     allTracks: [],
     playlists: [],
-    currentTrack: undefined
+    currentTrack: undefined,
+    playingTrackId: undefined,
 }
 
 export const AppContext = createContext(

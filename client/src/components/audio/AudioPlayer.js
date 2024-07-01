@@ -1,18 +1,24 @@
-import React, { useRef, useState, useEffect } from "react";
-import styles from "./AudioPlayer.module.css";
+import React, {useRef, useState, useEffect, useContext} from "react";
 import HandlePlay from "../handle-play/HandlePlay";
+import { AppContext } from "../../providers/appProvider";
+import { Actions } from "../../constants/actions";
+import styles from "./AudioPlayer.module.css";
 
 function AudioPlayer({ track }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef(null);
+  const { dispatch } = useContext(AppContext);
+
 
   const handlePlay = () => {
     setIsPlaying(true);
+    dispatch({type: Actions.PLAYING_TRACK_ID, payload: String(track.id) });
   };
 
   const handlePause = () => {
     setIsPlaying(false);
+    dispatch({type: Actions.PLAYING_TRACK_ID, payload: false });
   };
 
   const handleTimeUpdate = (e) => {
