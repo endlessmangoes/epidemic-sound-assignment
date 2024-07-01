@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import { AppContext } from "../../providers/appProvider";
 import { Actions } from "../../constants/actions";
 import HandlePlay from "../handle-play/HandlePlay";
